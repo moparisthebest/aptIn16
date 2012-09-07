@@ -1,0 +1,6 @@
+# This file contains the processor's we want to run
+# in this jar, there is only one, which runs all of
+# the old-style Java 5 apt processors it can find
+# automatically just like apt did, but in javac.
+
+com.moparisthebest.mirror.AptProcessor

@@ -1,0 +1,20 @@
+# This shows the replacements of the old com.sun.mirror.type classes with the new javax.lang.model.type classes
+# indentation shows inheritence in com.sun.mirror.type classes
+
+TypeMirror                   	javax.lang.model.type.TypeMirror
+
+	PrimitiveType 	            javax.lang.model.type.PrimitiveType
+
+	ReferenceType 	            javax.lang.model.type.ReferenceType
+		ArrayType 	            javax.lang.model.type.ArrayType
+		TypeVariable 	        javax.lang.model.type.TypeVariable
+		
+		DeclaredType 	        javax.lang.model.type.DeclaredType
+			ClassType 	        javax.lang.model.type.DeclaredType
+				EnumType 	    javax.lang.model.type.DeclaredType
+			InterfaceType 	    javax.lang.model.type.DeclaredType
+				AnnotationType 	javax.lang.model.type.DeclaredType
+
+	VoidType 	                javax.lang.model.type.NoType
+	
+	WildcardType 	            javax.lang.model.type.WildcardType

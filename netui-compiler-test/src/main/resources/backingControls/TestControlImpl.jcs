@@ -1,0 +1,21 @@
+package backingControls;
+
+@org.apache.beehive.controls.api.bean.ControlImplementation(isTransient=true)
+public class TestControlImpl implements TestControl
+{ 
+    /**
+     * @common:operation
+     */
+    public String sayHello()
+    {
+        return "hello there";
+    }
+
+    /**
+     * @common:operation
+     */
+    public String sayBye()
+    {
+        return "bye";
+    }
+} 

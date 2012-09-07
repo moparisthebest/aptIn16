@@ -1,0 +1,25 @@
+# This shows the replacements of the old com.sun.mirror.declaration classes with the new javax.lang.model.element classes
+# indentation shows inheritence in com.sun.mirror.declaration classes
+
+Declaration 	                                    javax.lang.model.element.Element
+	MemberDeclaration 	                            javax.lang.model.element.Element
+	
+		ExecutableDeclaration 	                    javax.lang.model.element.ExecutableElement
+			ConstructorDeclaration 	                javax.lang.model.element.ExecutableElement
+			MethodDeclaration 	                    javax.lang.model.element.ExecutableElement
+				AnnotationTypeElementDeclaration 	javax.lang.model.element.ExecutableElement
+
+		TypeDeclaration 	                        javax.lang.model.element.TypeElement
+			ClassDeclaration 	                    javax.lang.model.element.TypeElement
+				EnumDeclaration 	                javax.lang.model.element.TypeElement
+			InterfaceDeclaration 	                javax.lang.model.element.TypeElement
+				AnnotationTypeDeclaration 	        javax.lang.model.element.TypeElement
+
+		FieldDeclaration 	                        javax.lang.model.element.VariableElement
+			EnumConstantDeclaration 	            javax.lang.model.element.VariableElement
+
+	ParameterDeclaration 	                        javax.lang.model.element.VariableElement
+
+	PackageDeclaration 	                            javax.lang.model.element.PackageElement
+
+	TypeParameterDeclaration 	                    javax.lang.model.element.TypeParameterElement

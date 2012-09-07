@@ -1,0 +1,8 @@
+# generated with:
+# find -type f | sed -e "s/^\.\///" -e "s/\//./g" -e "s/\.java$//" > ../resources/META-INF/services/javax.annotation.processing.Processor
+
+org.apache.beehive.controls.runtime.generator.java6.ControlAnnotationProcessor
+org.apache.beehive.controls.runtime.generator.java6.ControlClientAnnotationProcessor
+org.apache.beehive.controls.runtime.generator.java6.ControlMemberTypeAnnotationProcessor
+org.apache.beehive.controls.runtime.generator.java6.ControlSecondaryAnnotationProcessor
+org.apache.beehive.netui.compiler.java6.PageFlowAnnotationProcessor
