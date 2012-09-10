@@ -22,7 +22,7 @@ way to handle this.
 
 Licensing
 ------------
-Yes, the project is licensed under the GNU/GPLv3, but that shouldn't affect anyone, even those writing propietary code, as your classes don't link to any of this code. It's simply another tool you run over your code to process it.  It would be similar to gcc, just because you use it to compile your programs, doesn't mean your programs must now be under the GNU/GPL.  If you think you have an issue with this, let me know and I'm sure we can work it out.
+Yes, the project is licensed under the [GNU/GPLv3][17], but that shouldn't affect anyone, even those writing propietary code, as your classes don't link to any of this code. It's simply another tool you run over your code to process it.  It would be similar to [gcc][18], just because you use it to compile your programs, doesn't mean your programs must now be under the [GNU/GPL][17].  If you think you have an issue with this, let me know and I'm sure we can work it out.
 
 Contributing
 ------------
@@ -50,3 +50,5 @@ Contributing
 [14]: https://github.com/moparisthebest/aptIn16/tree/master/netui-compiler
 [15]: https://github.com/moparisthebest/aptIn16/blob/master/apt-processor/src/main/java/com/moparisthebest/mirror/AptProcessor.java
 [16]: https://github.com/moparisthebest/aptIn16/pulls
+[17]: http://www.gnu.org/licenses/gpl-3.0-standalone.html
+[18]: http://gcc.gnu.org/
