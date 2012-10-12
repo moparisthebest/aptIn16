@@ -36,6 +36,7 @@ import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Types;
 import javax.tools.JavaFileObject;
 import java.io.File;
+import java.net.URI;
 
 public class ConvertSourcePosition implements SourcePosition {
 
@@ -113,7 +114,13 @@ public class ConvertSourcePosition implements SourcePosition {
 			JavaFileObject sourceFile = compUnit.getSourceFile();
 			if (sourceFile == null)
 				return emptySourcePosition;
-			File file = new File(sourceFile.toUri());
+			// http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=6419926
+			// compels us to check that the returned URIs are absolute, which
+			// they happen not to be for the default compiler on some unices
+			URI uri = sourceFile.toUri();
+			if (!uri.isAbsolute())
+				uri = URI.create("file://" + uri.toString()); 
+			File file = new File(uri);
 			ExpressionTree pkgName = compUnit.getPackageName();
 			if (callback != null && pkgName != null)
 				callback.deriveSourcePath(file, pkgName.toString());
