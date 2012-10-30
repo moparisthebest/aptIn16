@@ -21,7 +21,7 @@
 	<parent>
 		<groupId>com.moparisthebest.aptIn16</groupId>
 		<artifactId>aptIn16</artifactId>
-		<version>0.1</version>
+		<version>0.2-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>core</artifactId>
