@@ -34,18 +34,6 @@
 			<version>${project.version}</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.beehive</groupId>
-			<artifactId>beehive-controls</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.beehive</groupId>
-			<artifactId>beehive-netui-compiler</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-
 	</dependencies>
 	<build>
 		<plugins>

@@ -81,16 +81,15 @@ public class ConvertAnnotationProcessorFactory implements Processor {
 			internal = (AnnotationProcessorFactory) Class.forName(annotationProcessorFactoryName).newInstance();
 			System.out.println("ConvertAnnotationProcessorFactory running " + internal.getClass().getName());
 		} catch (Throwable e) {
-			System.out.printf("Not running AnnotationProcessorFactory '%s' because of error!\n", annotationProcessorFactoryName);
-			e.printStackTrace();
+			System.out.printf("Not running AnnotationProcessorFactory '%s' because of error!  Not on classpath?\n", annotationProcessorFactoryName);
+			if(Debug.debug)
+				e.printStackTrace();
 		}
 		this.internal = internal;
 	}
 
 	public ConvertAnnotationProcessorFactory(AnnotationProcessorFactory internal) {
-		if (internal == null)
-			throw new NullPointerException("AnnotationProcessorFactory cannot be null!");
-		System.out.println("ConvertAnnotationProcessorFactory running " + internal.getClass().getName());
+		System.out.println("ConvertAnnotationProcessorFactory running " + (internal == null ? "null" : internal.getClass().getName()));
 		this.internal = internal;
 	}
 
@@ -105,11 +104,15 @@ public class ConvertAnnotationProcessorFactory implements Processor {
 
 	@Override
 	public Set<String> getSupportedOptions() {
+		if(internal == null)
+			return Collections.emptySet();
 		return cleanOptions(internal.supportedOptions());
 	}
 
 	@Override
 	public Set<String> getSupportedAnnotationTypes() {
+		if(internal == null)
+			return Collections.emptySet();
 		if (Debug.debug)
 			System.out.printf("factory: '%s' supportedAnnotationTypes: '%s'\n", internal.getClass().getName(), internal.supportedAnnotationTypes());
 		return Convertable.toSet(internal.supportedAnnotationTypes());
@@ -173,6 +176,8 @@ public class ConvertAnnotationProcessorFactory implements Processor {
 	 */
 	@Override
 	public synchronized boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
+		if(internal == null)
+			return false;
 		env.getFiler().setModified(false);
 		env.setRoundEnv(roundEnv);
 		internal.getProcessorFor(ConvertDeclaration.getConvertable().convertToSet(annotations, AnnotationTypeDeclaration.class), env).process();
@@ -194,21 +199,21 @@ public class ConvertAnnotationProcessorFactory implements Processor {
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (o instanceof AnnotationProcessorFactory) return internal.equals(o);
+		if (o instanceof AnnotationProcessorFactory) return o.equals(internal);
 		if (o == null || getClass() != o.getClass()) return false;
 
 		ConvertAnnotationProcessorFactory that = (ConvertAnnotationProcessorFactory) o;
 
-		return internal.equals(that.internal);
+		return internal == that.internal || (internal != null && internal.equals(that.internal));
 	}
 
 	@Override
 	public int hashCode() {
-		return internal.hashCode();
+		return internal == null ? 0 : internal.hashCode();
 	}
 
 	@Override
 	public String toString() {
-		return internal.toString();
+		return internal == null ? "null" : internal.toString();
 	}
 }
