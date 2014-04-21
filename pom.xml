@@ -26,7 +26,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.moparisthebest.aptIn16</groupId>
 	<artifactId>aptIn16</artifactId>
-	<version>0.2</version>
+	<version>0.3-SNAPSHOT</version>
 	<name>aptIn16</name>
 	<description>
 		aptIn16 is an implementation of the com.sun.mirror.* classes allowing classes implementing them to run as
