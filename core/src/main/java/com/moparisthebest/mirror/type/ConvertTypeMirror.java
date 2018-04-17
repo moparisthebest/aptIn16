@@ -103,8 +103,8 @@ public class ConvertTypeMirror extends Convertable<TypeMirror, com.sun.mirror.ty
 					case ANNOTATION_TYPE:
 						return (T) new ConvertAnnotationType(dt);
 				}
-			//case ERROR:
-			//	return (T) new ConvertDeclaredType((javax.lang.model.type.ErrorType)from);
+			case ERROR:
+				return (T) new ConvertDeclaredType((javax.lang.model.type.ErrorType)from);
 			case NONE:
 			case NULL:
 				return null;
