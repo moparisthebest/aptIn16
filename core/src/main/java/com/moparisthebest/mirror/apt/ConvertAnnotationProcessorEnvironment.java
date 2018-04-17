@@ -70,6 +70,7 @@ public class ConvertAnnotationProcessorEnvironment implements AnnotationProcesso
 		elements = internal.getElementUtils();
 		ConvertDeclaration.elements = elements;
 		ConvertTypeMirror.types = internal.getTypeUtils();
+		ConvertDeclaration.messager = ConvertTypeMirror.messager = internal.getMessager();
 
 		// now calculate options once, since they are sort-of expensive
 		// real apt passes them back like so:

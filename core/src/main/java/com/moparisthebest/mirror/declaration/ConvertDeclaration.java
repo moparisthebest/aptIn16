@@ -26,13 +26,16 @@ import com.sun.mirror.util.DeclarationVisitor;
 import com.sun.mirror.util.SourcePosition;
 import com.moparisthebest.mirror.log.Debug;
 
+import javax.annotation.processing.Messager;
 import javax.lang.model.element.*;
 import javax.lang.model.util.Elements;
+import javax.tools.Diagnostic;
 import java.lang.annotation.Annotation;
 import java.util.*;
 
 public class ConvertDeclaration extends Convertable<Element, Declaration> implements com.sun.mirror.declaration.Declaration {
 
+	public static Messager messager = null;
 	public static Elements elements = null;
 	protected final javax.lang.model.element.Element internalElement;
 
@@ -106,12 +109,9 @@ public class ConvertDeclaration extends Convertable<Element, Declaration> implem
 				return (T) new ConvertParameterDeclaration((VariableElement) from);
 			case FIELD:
 				return (T) new ConvertFieldDeclaration((VariableElement) from);
-			default:
-				System.err.println("FATAL ERROR, REACHED DEFAULT!");
-				System.exit(1);
-				//throw new RuntimeException("FATAL ERROR, REACHED DEFAULT!");
 		}
 		// shouldn't ever get here
+		messager.printMessage(Diagnostic.Kind.ERROR, "ConvertDeclaration reached default for kind: " + from.getKind(), from);
 		return (T) new ConvertDeclaration(from);
 
 	}

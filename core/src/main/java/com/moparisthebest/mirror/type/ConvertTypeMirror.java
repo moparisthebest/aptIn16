@@ -22,12 +22,15 @@ import com.moparisthebest.mirror.convert.Convertable;
 import com.sun.mirror.util.TypeVisitor;
 import com.moparisthebest.mirror.log.Debug;
 
+import javax.annotation.processing.Messager;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.Types;
+import javax.tools.Diagnostic;
 
 public class ConvertTypeMirror extends Convertable<TypeMirror, com.sun.mirror.type.TypeMirror> implements com.sun.mirror.type.TypeMirror {
 	protected final javax.lang.model.type.TypeMirror internalTypeMirror;
 
+	public static Messager messager = null;
 	public static Types types = null;
 
 	protected ConvertTypeMirror(javax.lang.model.type.TypeMirror internalTypeMirror) {
@@ -100,17 +103,15 @@ public class ConvertTypeMirror extends Convertable<TypeMirror, com.sun.mirror.ty
 					case ANNOTATION_TYPE:
 						return (T) new ConvertAnnotationType(dt);
 				}
+			//case ERROR:
+			//	return (T) new ConvertDeclaredType((javax.lang.model.type.ErrorType)from);
 			case NONE:
 			case NULL:
 				return null;
-			default:
-				System.err.println("FATAL ERROR, REACHED DEFAULT!");
-				System.exit(1);
-				//throw new RuntimeException("FATAL ERROR, REACHED DEFAULT!");
 		}
 		// shouldn't ever get here
+		messager.printMessage(Diagnostic.Kind.ERROR, "ConvertTypeMirror reached default for kind: " + from.getKind(), types.asElement(from));
 		return (T) new ConvertTypeMirror(from);
-
 	}
 
 	@Override
