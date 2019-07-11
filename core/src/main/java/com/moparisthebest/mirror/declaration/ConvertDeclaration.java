@@ -35,6 +35,18 @@ import java.util.*;
 
 public class ConvertDeclaration extends Convertable<Element, Declaration> implements com.sun.mirror.declaration.Declaration {
 
+	private static final Modifier MODIFIER_DEFAULT;
+
+	static {
+		Modifier defaultModifier = null;
+		try {
+			defaultModifier = Modifier.valueOf("DEFAULT");
+		} catch (Throwable e) {
+			// ignore this, must not be running in 1.8+
+		}
+		MODIFIER_DEFAULT = defaultModifier;
+	}
+
 	public static Messager messager = null;
 	public static Elements elements = null;
 	protected final javax.lang.model.element.Element internalElement;
@@ -138,7 +150,14 @@ public class ConvertDeclaration extends Convertable<Element, Declaration> implem
 
 	@Override
 	public Collection<com.sun.mirror.declaration.Modifier> getModifiers() {
-		return Convertable.convertEnums(internalElement.getModifiers(), com.sun.mirror.declaration.Modifier.class);
+		Set<Modifier> modifiers = internalElement.getModifiers();
+		// handle 1.8 DEFAULT here carefully, should just be like PUBLIC for 1.5 code...
+		if (MODIFIER_DEFAULT != null && modifiers.contains(MODIFIER_DEFAULT)) {
+			modifiers = new HashSet<Modifier>(modifiers); // copy
+			modifiers.remove(MODIFIER_DEFAULT);
+			modifiers.add(Modifier.PUBLIC);
+		}
+		return Convertable.convertEnums(modifiers, com.sun.mirror.declaration.Modifier.class);
 	}
 
 	@Override
