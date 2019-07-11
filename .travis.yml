@@ -1,25 +1,21 @@
 language: java
 sudo: false
+dist: trusty
+
 addons:
   apt:
     packages:
-      - openjdk-6-jdk
-dist: trusty
-jdk:
-  - openjdk6
+      - ca-certificates-java
+      - openjdk-7-jre-headless
 
-install:
-  - if [[ "${TRAVIS_JDK_VERSION}" == 'openjdk6' ]]; then
-      export CUSTOM_MVN_VERION="3.2.5"
-      echo "Download Maven ${CUSTOM_MVN_VERION}....";
-      wget https://archive.apache.org/dist/maven/maven-3/${CUSTOM_MVN_VERION}/binaries/apache-maven-${CUSTOM_MVN_VERION}-bin.zip || travis_terminate 1;
-      unzip -qq apache-maven-${CUSTOM_MVN_VERION}-bin.zip || travis_terminate 1;
-      export M2_HOME=$PWD/apache-maven-${CUSTOM_MVN_VERION};
-      export PATH=$M2_HOME/bin:$PATH;
-      mvn -version;
-    fi
+jdk:
+  - openjdk7
 
 after_success:
-  - if [ "${TRAVIS_JDK_VERSION}" == 'openjdk8' ] || [ "${TRAVIS_JDK_VERSION}" == 'openjdk6' ]; then
-      mvn deploy --settings .travis-settings.xml -DskipTests=true -B || travis_terminate 1;
+  - if [[ "${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}" == 'master' ]]; then
+    mvn deploy --settings .travis-settings.xml -DskipTests=true -B || travis_terminate 1;
     fi
+
+cache:
+  directories:
+    - $HOME/.m2
