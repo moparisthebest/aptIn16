@@ -1,5 +1,7 @@
 # aptIn16
 
+[![Build Status](https://ci.moparisthe.best/job/moparisthebest/job/aptIn16/job/master/badge/icon%3Fstyle=plastic)](https://ci.moparisthe.best/job/moparisthebest/job/aptIn16/job/master/)
+
 aptIn16 is an implementation of the [Annotation Processing Tool (apt)][6] [com.sun.mirror.*][1] classes allowing classes implementing them to run as [Java 1.6 annotation processors][2] inside of javac ([JSR 269][3]). This is orders of magnitude faster than [apt][6]. It can be used by anyone who currently relies on apt but would like to switch to the newer/faster javac.
 
 In short, it implements [com.sun.mirror][1] using  [javax.annotation.processing][4] and [javax.lang.model][5] in the background.
